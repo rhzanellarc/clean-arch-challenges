@@ -1,9 +1,10 @@
 import ValidatorInterface from "../../@shared/validator/validator.interface";
 import Product from "../entity/product";
 import * as yup from "yup";
+import ProductInterface from "../entity/product.interface";
 
 export default class ProductYupValidator
-  implements ValidatorInterface<Product>
+  implements ValidatorInterface<ProductInterface>
 {
   validate(entity: Product): void {
     try {
