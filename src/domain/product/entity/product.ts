@@ -13,6 +13,7 @@ export default class Product extends Entity implements ProductInterface {
     this._name = name;
     this._price = price;
     this.validate();
+
     if (this.notification.hasErrors()) {
       throw new NotificationError(this.notification.getErrors());
     }
@@ -41,6 +42,23 @@ export default class Product extends Entity implements ProductInterface {
   }
 
   validate() {
-    ProductValidatorFactory.create().validate(this);
+    if (this._id == null || this._id == "") {
+      this.notification.addError({
+        context: 'product',
+        message: 'Id is required'
+      })
+    }
+    if (this.price <= 0) {
+      this.notification.addError({
+        context: 'product',
+        message: 'price must be greater than 0'
+      })
+    }
+    if (this.name == "" || this.name == undefined) {
+      this.notification.addError({
+        context: 'product',
+        message: 'Name is required'
+      })
+    }
   }
 }
